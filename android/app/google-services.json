@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "982312456634",
+    "project_id": "formmahasiswa-6f800",
+    "storage_bucket": "formmahasiswa-6f800.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982312456634:android:a72c71f65d8caea6f10d83",
+        "android_client_info": {
+          "package_name": "com.example.form_daftar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982312456634-at0ak1fs52kjd7tq2pcvhn142qtab1pj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6u_bl3iFlPRbTgNdsAsUyi8rBM9MVUTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982312456634-at0ak1fs52kjd7tq2pcvhn142qtab1pj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982312456634:android:d8bf48ba5139de90f10d83",
+        "android_client_info": {
+          "package_name": "com.example.notif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982312456634-at0ak1fs52kjd7tq2pcvhn142qtab1pj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6u_bl3iFlPRbTgNdsAsUyi8rBM9MVUTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982312456634-at0ak1fs52kjd7tq2pcvhn142qtab1pj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
