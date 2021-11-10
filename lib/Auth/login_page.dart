@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notif/Auth/home.dart';
+import 'package:notif/Auth/profile_page.dart';
+import 'package:notif/Navigator/navigator.dart';
 import 'package:notif/Auth/register_page.dart';
 import 'package:notif/Validator/fire_auth.dart';
 import 'package:notif/Validator/validator.dart';
@@ -13,28 +14,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
-
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
-
   bool _isProcessing = false;
-
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-
     User? user = FirebaseAuth.instance.currentUser;
-
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => Navbar(),
         ),
       );
     }
-
     return firebaseApp;
   }
 
@@ -144,7 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                                               Navigator.of(context)
                                                   .pushReplacement(
                                                 MaterialPageRoute(
-                                                  builder: (context) => Home(),
+                                                  builder: (context) =>
+                                                      Navbar(),
                                                 ),
                                               );
                                             }

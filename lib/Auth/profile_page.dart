@@ -5,9 +5,7 @@ import 'package:notif/Validator/fire_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;
-
   const ProfilePage({required this.user});
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -15,9 +13,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
-
   late User _currentUser;
-
   @override
   void initState() {
     _currentUser = widget.user;
@@ -82,7 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         icon: Icon(Icons.refresh),
                         onPressed: () async {
                           User? user = await FireAuth.refreshUser(_currentUser);
-
                           if (user != null) {
                             setState(() {
                               _currentUser = user;
