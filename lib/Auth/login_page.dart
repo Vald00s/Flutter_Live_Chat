@@ -6,6 +6,7 @@ import 'package:notif/Navigator/navigator.dart';
 import 'package:notif/Auth/register_page.dart';
 import 'package:notif/Validator/fire_auth.dart';
 import 'package:notif/Validator/validator.dart';
+import 'package:notif/Views/setting.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Navbar(),
+          builder: (context) => ProfilePage(user: user),
         ),
       );
     }
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   .pushReplacement(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Navbar(),
+                                                      ProfilePage(user: user),
                                                 ),
                                               );
                                             }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notif/Auth/profile_page.dart';
 import 'package:notif/Validator/fire_auth.dart';
+import 'package:notif/Validator/fire_data.dart';
 import 'package:notif/Validator/validator.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
 
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
@@ -131,6 +133,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                           password:
                                               _passwordTextController.text,
                                         );
+
+                                        userSetup(
+                                            _nameTextController.text,
+                                            _emailTextController.text,
+                                            _passwordTextController);
 
                                         setState(() {
                                           _isProcessing = false;
