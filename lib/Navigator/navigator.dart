@@ -17,6 +17,7 @@ class Navbar extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<Navbar> {
+  bool _isSigningOut = false;
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -36,11 +37,26 @@ class _MyStatefulWidgetState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber[800],
-        centerTitle: true,
-        title: Text(
-          'Vald00s',
-        ),
+        title: Text('Profile'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              setState(() {
+                _isSigningOut = true;
+              });
+              await FirebaseAuth.instance.signOut();
+              setState(() {
+                _isSigningOut = false;
+              });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: IndexedStack(
         index: _selectedIndex,

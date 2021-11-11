@@ -13,6 +13,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
+  bool _isSigningHome = false;
   late User _currentUser;
   @override
   void initState() {
@@ -25,6 +26,25 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              setState(() {
+                _isSigningOut = true;
+              });
+              await FirebaseAuth.instance.signOut();
+              setState(() {
+                _isSigningOut = false;
+              });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(
