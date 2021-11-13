@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Validator/fire_data.dart';
-import 'package:notif/Validator/fire_auth.dart';
-/*
+import 'package:notif/Auth/login_page.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -17,47 +16,14 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addObserver(this);
-    setStatus("Online");
-  }
-
-  void setStatus(String status) async {
-    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
-      "status": status,
-    });
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      // online
-      setStatus("Online");
-    } else {
-      // offline
-      setStatus("Offline");
-    }
-  }
-
-  String chatRoomId(String user1, String user2) {
-    if (user1[0].toLowerCase().codeUnits[0] >
-        user2.toLowerCase().codeUnits[0]) {
-      return "$user1$user2";
-    } else {
-      return "$user2$user1";
-    }
-  }
-
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     setState(() {
       isLoading = true;
     });
-
     await _firestore
         .collection('users')
-        .where("email", isEqualTo: _search.text)
+        .where("username", isEqualTo: _search.text)
         .get()
         .then((value) {
       setState(() {
@@ -71,7 +37,6 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: isLoading
           ? Center(
@@ -85,6 +50,15 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
               children: [
                 SizedBox(
                   height: size.height / 20,
+                ),
+                Container(
+                  child: Text(
+                    'Search by Username',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black38),
+                  ),
                 ),
                 Container(
                   height: size.height / 14,
@@ -116,14 +90,10 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
                 ),
                 userMap != null
                     ? ListTile(
-                        onTap: () {
-                          String roomId = chatRoomId(
-                              _auth.currentUser!.displayName!,
-                              userMap!['name']);
-                        },
-                        leading: Icon(Icons.account_box, color: Colors.black),
+                        onTap: () {},
+                        leading: Icon(Icons.account_box, color: Colors.white),
                         title: Text(
-                          userMap!['name'],
+                          userMap!['username'],
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 17,
@@ -131,34 +101,11 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
                           ),
                         ),
                         subtitle: Text(userMap!['email']),
-                        trailing: Icon(Icons.chat, color: Colors.black),
+                        trailing: Icon(Icons.chat, color: Colors.amber[800]),
                       )
                     : Container(),
               ],
             ),
-    );
-  }
-}
-*/
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.lightBlueAccent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Text(
-              'Screen 1',
-              style: TextStyle(color: Colors.red, fontSize: 20),
-            ),
-            margin: EdgeInsets.all(16),
-          ),
-        ],
-      ),
     );
   }
 }

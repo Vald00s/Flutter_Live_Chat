@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:notif/Auth/login_page.dart';
 import 'package:notif/Validator/fire_auth.dart';
 
-class ProfilePage extends StatefulWidget {
+class Profile extends StatefulWidget {
   final User user;
-  ProfilePage({required this.user});
+  Profile({required this.user});
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<Profile> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
   bool _isSigningHome = false;
   late User _currentUser;
   @override
   void initState() {
-    _currentUser = widget.user;
+    _currentUser = widget.user as User;
     super.initState();
   }
 

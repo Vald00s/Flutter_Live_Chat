@@ -63,6 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   key: _registerFormKey,
                   child: Column(
                     children: <Widget>[
+                      SizedBox(height: 16.0),
                       TextFormField(
                         controller: _nameTextController,
                         focusNode: _focusName,
@@ -79,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 16.0),
                       TextFormField(
                         controller: _locationTextController,
                         focusNode: _focusLocation,
@@ -155,7 +157,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
                                           name: _nameTextController.text,
-                                          location: _nameTextController.text,
+                                          location:
+                                              _locationTextController.text,
                                           email: _emailTextController.text,
                                           password:
                                               _passwordTextController.text,

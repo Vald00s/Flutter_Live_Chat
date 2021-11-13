@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:notif/Auth/login_page.dart';
-import 'package:notif/Views/chat.dart';
+import 'package:notif/Views/grup.dart';
 import 'package:notif/Views/home.dart';
 import 'package:notif/Views/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:notif/Navigator/side_menu.dart';
+import 'package:notif/main.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Navbar extends StatefulWidget {
@@ -16,12 +18,13 @@ class Navbar extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<Navbar> {
   bool _isSigningOut = false;
+  bool _theme = false;
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Chat(),
+    Grup(),
     Setting(),
   ];
 
@@ -35,7 +38,9 @@ class _MyStatefulWidgetState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        backgroundColor: Colors.amber[800],
+        centerTitle: true,
+        title: Text('Vald00s'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
@@ -56,23 +61,26 @@ class _MyStatefulWidgetState extends State<Navbar> {
           )
         ],
       ),
+
+      drawer: Sidemenu(),
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.amber[800],
         selectedFontSize: 15,
-        selectedIconTheme: IconThemeData(color: Colors.amber[800], size: 30),
-        selectedItemColor: Colors.amberAccent,
+        selectedIconTheme: IconThemeData(color: Colors.black, size: 30),
+        selectedItemColor: Colors.black,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.contact_mail),
+            label: 'Teman',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Pesan',
+            icon: Icon(Icons.location_city),
+            label: 'Group',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
