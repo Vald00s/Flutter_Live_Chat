@@ -7,6 +7,17 @@ class Validator {
     if (name.isEmpty) {
       return 'Name can\'t be empty';
     }
+    return null;
+  }
+
+  static String? validateLocation({required String? location}) {
+    if (location == null) {
+      return null;
+    }
+
+    if (location.isEmpty) {
+      return 'Name can\'t be empty';
+    }
 
     return null;
   }

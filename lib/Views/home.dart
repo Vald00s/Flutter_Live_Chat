@@ -16,7 +16,6 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   @override
   void initState() {
     super.initState();
@@ -52,7 +51,6 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
 
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
     setState(() {
       isLoading = true;
     });

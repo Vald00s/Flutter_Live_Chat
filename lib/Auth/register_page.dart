@@ -1,10 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Auth/profile_page.dart';
 import 'package:notif/Navigator/navigator.dart';
 import 'package:notif/Validator/fire_auth.dart';
-import 'package:notif/Validator/fire_data.dart';
 import 'package:notif/Validator/validator.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,10 +15,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
+  final _locationTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
 
   final _focusName = FocusNode();
+  final _focusLocation = FocusNode();
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
@@ -31,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return GestureDetector(
       onTap: () {
         _focusName.unfocus();
+        _focusLocation.unfocus();
         _focusEmail.unfocus();
         _focusPassword.unfocus();
       },
@@ -69,7 +70,23 @@ class _RegisterPageState extends State<RegisterPage> {
                           name: value,
                         ),
                         decoration: InputDecoration(
-                          hintText: "Name",
+                          hintText: "Username",
+                          errorBorder: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _locationTextController,
+                        focusNode: _focusLocation,
+                        validator: (value) => Validator.validateLocation(
+                          location: value,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Location",
                           errorBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(6.0),
                             borderSide: BorderSide(
@@ -121,6 +138,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () async {
+                                      final String name =
+                                          _nameTextController.text.trim();
+                                      final String location =
+                                          _locationTextController.text.trim();
+                                      final String email =
+                                          _emailTextController.text.trim();
+                                      final String password =
+                                          _passwordTextController.text.trim();
                                       setState(() {
                                         _isProcessing = true;
                                       });
@@ -130,15 +155,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
                                           name: _nameTextController.text,
+                                          location: _nameTextController.text,
                                           email: _emailTextController.text,
                                           password:
                                               _passwordTextController.text,
                                         );
-
-                                        userSetup(
-                                            _nameTextController.text,
-                                            _emailTextController.text,
-                                            _passwordTextController);
 
                                         setState(() {
                                           _isProcessing = false;
@@ -151,7 +172,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                               builder: (context) => Navbar(),
                                             ),
                                             ModalRoute.withName('/'),
-                                          );
+                                          )
+                                              .then((value) async {
+                                            User? auth = FirebaseAuth
+                                                .instance.currentUser;
+                                            user = auth;
+                                            await FirebaseFirestore.instance
+                                                .collection("users")
+                                                .doc(user!.uid)
+                                                .set({
+                                              'uid': user!.uid,
+                                              'username': name,
+                                              'location': location,
+                                              'email': email,
+                                              'password': password,
+                                              'status': 'Offline'
+                                            });
+                                          });
                                         }
                                       }
                                     },
