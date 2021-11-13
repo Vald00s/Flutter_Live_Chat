@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Authentication',
+      title: 'Live Chat Vald00s',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,

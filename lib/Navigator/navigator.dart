@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notif/Auth/login_page.dart';
-import 'package:notif/Auth/profile_page.dart';
 import 'package:notif/Views/chat.dart';
 import 'package:notif/Views/home.dart';
 import 'package:notif/Views/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Navbar extends StatefulWidget {

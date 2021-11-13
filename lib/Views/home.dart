@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notif/Validator/fire_data.dart';
 import 'package:notif/Validator/fire_auth.dart';
-
+/*
 class Home extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -136,6 +136,29 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
                     : Container(),
               ],
             ),
+    );
+  }
+}
+*/
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.lightBlueAccent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            child: Text(
+              'Screen 1',
+              style: TextStyle(color: Colors.red, fontSize: 20),
+            ),
+            margin: EdgeInsets.all(16),
+          ),
+        ],
+      ),
     );
   }
 }
