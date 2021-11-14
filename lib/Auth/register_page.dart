@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
-
+  String _location = "Surabaya";
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _locationTextController = TextEditingController();
@@ -43,7 +43,8 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(30.0),
+          padding:
+              const EdgeInsets.only(top: 30, bottom: 30, left: 60, right: 60),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +81,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      //
+                      //
+                      /*
                       TextFormField(
                         controller: _locationTextController,
                         focusNode: _focusLocation,
@@ -97,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
+                      */
                       SizedBox(height: 16.0),
                       TextFormField(
                         controller: _emailTextController,
@@ -132,7 +136,48 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 32.0),
+                      SizedBox(height: 16.0),
+                      Container(
+                        width: 350,
+                        child: DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            hintText: "Location",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          style: TextStyle(color: Colors.black),
+                          items: <String>[
+                            'Surabaya',
+                            'Sidoarjo',
+                            'Mojokerto',
+                            'Gresik',
+                            'Pasuruan',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              _location = value!;
+                            });
+                          },
+                          hint: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "Location",
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 17),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16.0),
                       _isProcessing
                           ? CircularProgressIndicator()
                           : Row(
@@ -151,19 +196,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                       setState(() {
                                         _isProcessing = true;
                                       });
-
                                       if (_registerFormKey.currentState!
                                           .validate()) {
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
                                           name: _nameTextController.text,
-                                          location:
-                                              _locationTextController.text,
+                                          location: _location,
                                           email: _emailTextController.text,
                                           password:
                                               _passwordTextController.text,
                                         );
-
                                         setState(() {
                                           _isProcessing = false;
                                         });

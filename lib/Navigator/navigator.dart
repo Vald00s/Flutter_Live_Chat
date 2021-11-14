@@ -41,25 +41,6 @@ class _MyStatefulWidgetState extends State<Navbar> {
         backgroundColor: Colors.amber[800],
         centerTitle: true,
         title: Text('Vald00s'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              setState(() {
-                _isSigningOut = true;
-              });
-              await FirebaseAuth.instance.signOut();
-              setState(() {
-                _isSigningOut = false;
-              });
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(),
-                ),
-              );
-            },
-          )
-        ],
       ),
 
       drawer: Sidemenu(),
