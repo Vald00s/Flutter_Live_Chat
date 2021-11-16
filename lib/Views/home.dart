@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Auth/login_page.dart';
+import 'package:notif/Views/chatroom/chatroom.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,6 +16,15 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
+  String chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2.toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
+    }
+  }
+
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     setState(() {
@@ -90,7 +99,20 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
                 ),
                 userMap != null
                     ? ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          String roomId = chatRoomId(
+                              _auth.currentUser!.displayName!,
+                              userMap!['name']);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ChatRoom(
+                                chatRoomId: roomId,
+                                userMap: userMap!,
+                              ),
+                            ),
+                          );
+                        },
                         leading: Icon(Icons.account_box, color: Colors.white),
                         title: Text(
                           userMap!['username'],
