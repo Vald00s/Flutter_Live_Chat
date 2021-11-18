@@ -97,9 +97,12 @@ class ChatRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        backgroundColor: Colors.amber[100],
         title: StreamBuilder<DocumentSnapshot>(
           stream:
               _firestore.collection("users").doc(userMap['uid']).snapshots(),
@@ -108,10 +111,13 @@ class ChatRoom extends StatelessWidget {
               return Container(
                 child: Column(
                   children: [
-                    Text(userMap['name']),
+                    Text(
+                      userMap['username'],
+                      style: TextStyle(color: Colors.black),
+                    ),
                     Text(
                       snapshot.data!['status'],
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14, color: Colors.black),
                     ),
                   ],
                 ),
@@ -122,9 +128,11 @@ class ChatRoom extends StatelessWidget {
           },
         ),
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(padding: EdgeInsets.only(bottom: 10)),
             Container(
               height: size.height / 1.25,
               width: size.width,
@@ -153,6 +161,7 @@ class ChatRoom extends StatelessWidget {
               ),
             ),
             Container(
+              color: Colors.amber[100],
               height: size.height / 10,
               width: size.width,
               alignment: Alignment.center,
@@ -162,24 +171,38 @@ class ChatRoom extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: MediaQuery.of(context).viewInsets,
+                    ),
                     Container(
-                      height: size.height / 17,
+                      height: size.height / 12,
                       width: size.width / 1.3,
                       child: TextField(
                         controller: _message,
                         decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () => getImage(),
-                              icon: Icon(Icons.photo),
+                          fillColor: Colors.white,
+                          filled: true,
+                          suffixIcon: IconButton(
+                            onPressed: () => getImage(),
+                            icon: Icon(
+                              Icons.photo,
+                              color: Colors.amber[600],
                             ),
-                            hintText: "Send Message",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            )),
+                          ),
+                          hintText: "Send Message",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(color: Colors.pinkAccent),
+                          ),
+                        ),
                       ),
                     ),
                     IconButton(
-                        icon: Icon(Icons.send), onPressed: onSendMessage),
+                        icon: Icon(
+                          Icons.send,
+                          color: Colors.amber[600],
+                        ),
+                        onPressed: onSendMessage),
                   ],
                 ),
               ),
@@ -202,22 +225,21 @@ class ChatRoom extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.blue,
+                color: Colors.black26,
               ),
               child: Text(
                 map['message'],
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
           )
         : Container(
-            height: size.height / 2.5,
+            height: size.height / 3,
             width: size.width,
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             alignment: map['sendby'] == _auth.currentUser!.displayName
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
@@ -230,16 +252,20 @@ class ChatRoom extends StatelessWidget {
                 ),
               ),
               child: Container(
-                height: size.height / 2.5,
-                width: size.width / 2,
-                decoration: BoxDecoration(border: Border.all()),
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(map['message']),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(150.0)),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 4.0,
+                  ),
+                ),
                 alignment: map['message'] != "" ? null : Alignment.center,
-                child: map['message'] != ""
-                    ? Image.network(
-                        map['message'],
-                        fit: BoxFit.cover,
-                      )
-                    : CircularProgressIndicator(),
               ),
             ),
           );
@@ -254,7 +280,6 @@ class ShowImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Container(
         height: size.height,

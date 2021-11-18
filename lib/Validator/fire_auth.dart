@@ -7,7 +7,7 @@ class FireAuth {
   Stream<User?> get authStateChanges => auth.idTokenChanges();
   // For registering a new user
   static Future<User?> registerUsingEmailPassword({
-    required String name,
+    required String username,
     required String location,
     required String email,
     required String password,
@@ -19,18 +19,20 @@ class FireAuth {
         email: email,
         password: password,
       );
+      userCredential.user!.updateDisplayName(username);
       user = userCredential.user;
-      await user!.updateProfile(displayName: name);
+      await user!.updateProfile(displayName: username);
       await user.reload();
       user = auth.currentUser;
       await FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
         'uid': user.uid,
-        'username': name,
+        'username': username,
         'location': location,
         'email': email,
         'password': password,
-        'status': 'Offline'
+        'status': 'Unavailable'
       });
+      return userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

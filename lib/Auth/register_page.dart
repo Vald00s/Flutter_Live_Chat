@@ -200,7 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           .validate()) {
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
-                                          name: _nameTextController.text,
+                                          username: _nameTextController.text,
                                           location: _location,
                                           email: _emailTextController.text,
                                           password:
@@ -231,7 +231,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               'location': location,
                                               'email': email,
                                               'password': password,
-                                              'status': 'Offline'
+                                              'status': 'Unavailable'
                                             });
                                           });
                                         }

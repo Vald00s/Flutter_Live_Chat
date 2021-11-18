@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notif/Views/chatroom/chatroom.dart';
+import 'package:notif/Validator/fire_auth.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,7 +18,29 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    setStatus("Online");
+  }
+
+  void setStatus(String status) async {
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
+      "status": status,
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setStatus("Online");
+    } else {
+      setStatus("Offline");
+    }
+  }
+
   String chatRoomId(String user1, String user2) {
+    int i = 0;
     if (user1[0].toLowerCase().codeUnits[0] >
         user2.toLowerCase().codeUnits[0]) {
       return "$user1$user2";
@@ -102,7 +126,7 @@ class _HomeScreenState extends State<Home> with WidgetsBindingObserver {
                         onTap: () {
                           String roomId = chatRoomId(
                               _auth.currentUser!.displayName!,
-                              userMap!['name']);
+                              userMap!['username']);
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
