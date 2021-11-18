@@ -100,7 +100,7 @@ class ChatRoom extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.black,
         ),
         backgroundColor: Colors.amber[100],
         title: StreamBuilder<DocumentSnapshot>(

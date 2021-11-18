@@ -38,9 +38,12 @@ class _MyStatefulWidgetState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber[800],
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.amber[100],
         centerTitle: true,
-        title: Text('Vald00s'),
+        title: Text('Vald00s', style: TextStyle(color: Colors.black)),
       ),
 
       drawer: Sidemenu(),
@@ -49,7 +52,7 @@ class _MyStatefulWidgetState extends State<Navbar> {
         children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.amber[800],
+        backgroundColor: Colors.amber[100],
         selectedFontSize: 15,
         selectedIconTheme: IconThemeData(color: Colors.black, size: 30),
         selectedItemColor: Colors.black,
