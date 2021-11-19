@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:notif/Auth/login_page.dart';
-import 'package:notif/Views/grup.dart';
-import 'package:notif/Views/home.dart';
-import 'package:notif/Views/setting.dart';
+import 'package:Vald00s/Auth/login_page.dart';
+import 'package:Vald00s/Views/grup.dart';
+import 'package:Vald00s/Views/home.dart';
+import 'package:Vald00s/Views/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Navigator/side_menu.dart';
-import 'package:notif/main.dart';
+import 'package:Vald00s/Navigator/side_menu.dart';
+import 'package:Vald00s/main.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Navbar extends StatefulWidget {

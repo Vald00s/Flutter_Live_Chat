@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Navigator/navigator.dart';
-import 'package:notif/Validator/fire_auth.dart';
-import 'package:notif/Validator/validator.dart';
+import 'package:Vald00s/Navigator/navigator.dart';
+import 'package:Vald00s/Validator/fire_auth.dart';
+import 'package:Vald00s/Validator/validator.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

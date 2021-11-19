@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notif/Auth/profile_page.dart';
-import 'package:notif/Navigator/navigator.dart';
-import 'package:notif/Auth/register_page.dart';
-import 'package:notif/Validator/fire_auth.dart';
-import 'package:notif/Validator/validator.dart';
-import 'package:notif/Views/setting.dart';
+import 'package:Vald00s/Auth/profile_page.dart';
+import 'package:Vald00s/Navigator/navigator.dart';
+import 'package:Vald00s/Auth/register_page.dart';
+import 'package:Vald00s/Validator/fire_auth.dart';
+import 'package:Vald00s/Validator/validator.dart';
+import 'package:Vald00s/Views/setting.dart';
 
 class LoginPage extends StatefulWidget {
   @override

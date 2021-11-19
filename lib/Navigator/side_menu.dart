@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notif/Auth/login_page.dart';
-import 'package:notif/Auth/profile_page.dart';
+import 'package:Vald00s/Auth/login_page.dart';
+import 'package:Vald00s/Auth/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Views/profile.dart';
-import 'package:notif/Views/setting.dart';
+import 'package:Vald00s/Views/profile.dart';
+import 'package:Vald00s/Views/setting.dart';
 
 class Sidemenu extends StatelessWidget {
   bool _isSigningOut = false;

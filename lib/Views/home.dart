@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:notif/Views/chatroom/chatroom.dart';
-import 'package:notif/Validator/fire_auth.dart';
+import 'package:Vald00s/Views/chatroom/chatroom.dart';
+import 'package:Vald00s/Validator/fire_auth.dart';
 
 class Home extends StatefulWidget {
   @override

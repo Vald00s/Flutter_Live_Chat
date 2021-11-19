@@ -1,4 +1,4 @@
-name: notif
+name: Vald00s
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,10 +36,16 @@ dependencies:
   image_picker: ^0.8.3+2
   firebase_storage: ^10.0.2
   uuid: ^3.0.4
+  flutter_launcher_icons: ^0.9.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+flutter_icons:
+  image_path: "assets/images/icon.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:

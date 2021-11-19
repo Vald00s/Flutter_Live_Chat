@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:notif/Auth/login_page.dart';
-import 'package:notif/Validator/fire_auth.dart';
+import 'package:Vald00s/Auth/login_page.dart';
+import 'package:Vald00s/Validator/fire_auth.dart';
 
 class Profile extends StatefulWidget {
   final User user;
